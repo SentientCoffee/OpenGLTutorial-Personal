@@ -12,8 +12,10 @@ constexpr GLchar* SCR_TITLE  = const_cast<GLchar*>("OpenGL for CG");
 
 int main() {
 
-	Application* application = new Application(SCR_WIDTH, SCR_HEIGHT, SCR_TITLE);
-	application->run();
+	if (!Application::isInstantiated()) {
+		Application* application = new Application(SCR_WIDTH, SCR_HEIGHT, SCR_TITLE);
+		application->run();
+	}
 	
 	return 0;
 
