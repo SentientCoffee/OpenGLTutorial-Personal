@@ -2,9 +2,6 @@
 #define APPLICATION_H
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-#include "Macros.h"
 
 namespace Coffee {
 

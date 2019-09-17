@@ -38,5 +38,12 @@
     <ClInclude Include="src\Headers\ShaderProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Headers\VertexInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Shaders\vertShader.vert" />
+    <None Include="res\Shaders\fragShader.frag" />
   </ItemGroup>
 </Project>

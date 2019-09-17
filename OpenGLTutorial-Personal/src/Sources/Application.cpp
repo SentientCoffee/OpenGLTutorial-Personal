@@ -1,10 +1,15 @@
 #include "Application.h"
+#include <GLFW/glfw3.h>
+
+#include "Macros.h"
+#include "VertexInfo.h"
+#include "ShaderProgram.h"
 
 using namespace Coffee;
 
 GLuint  Application::_width               = 10u;
 GLuint  Application::_height              = 10u;
-GLchar* Application::_title               = reinterpret_cast<GLchar*>("Failed to start application!");
+GLchar* Application::_title               = const_cast<GLchar*>("Failed to start application!");
 GLuint  Application::_contextVersionMajor = 4u;
 GLuint  Application::_contextVersionMinor = 6u;
 
@@ -63,7 +68,25 @@ void Application::run() {
 	}
 	DEBUG_LOG_N("GLFW OpenGL function pointers loaded.");
 
-#pragma endregion 
+#pragma endregion
+
+
+	
+#pragma region SHADERS
+
+	ShaderProgram shaderProgram("vertShader.vert", "fragShader.frag");
+	
+#pragma endregion
+
+
+	
+#pragma region VAO/VBO/EBO SETUP
+
+	VertexInfo::setupVertices();
+	VertexInfo::setupIndices();
+	VertexInfo::setupVertexObjects();
+
+#pragma endregion
 
 	
 	
@@ -82,6 +105,8 @@ void Application::run() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// TODO: RENDER HERE
+		shaderProgram.use();
+		VertexInfo::draw();
 
 		// Swap the buffers after rendering
 		glfwSwapBuffers(window);

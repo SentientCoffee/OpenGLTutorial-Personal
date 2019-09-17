@@ -11,7 +11,8 @@ using sstream = std::stringstream;
 
 using namespace Coffee;
 
-string ShaderProgram::_shaderDirectory = R"(..\res\Shaders\)";
+string ShaderProgram::_shaderDirectory = 
+"C:/Users/Daniel/Desktop/Repos/OpenGLTutorial-Personal/OpenGLTutorial-Personal/res/Shaders/";
 
 ShaderProgram::ShaderProgram() : _programId(0), _vertexPath(""), _fragmentPath(""), _geometryPath("") {}
 
@@ -27,20 +28,20 @@ ShaderProgram::ShaderProgram(const std::string& vertPath, const std::string& fra
 void ShaderProgram::createShader() {
 	GLuint vertShader = 0, fragShader = 0, geoShader = 0;
 
-	DEBUG_LOG_N("----------COMPILING SHADERS----------");
+	DEBUG_LOG_N("\n----------COMPILING SHADERS----------");
 
 	DEBUG_LOG_N("------VERTEX SHADER------");
 	compileShader(_vertexPath, ShaderType::VERTEX, vertShader);
 	
-	DEBUG_LOG_N("-----FRAGMENT SHADER-----");
+	DEBUG_LOG_N("\n-----FRAGMENT SHADER-----");
 	compileShader(_fragmentPath, ShaderType::FRAGMENT, fragShader);
 	
 	if (!_geometryPath.empty()) {
-		DEBUG_LOG_N("-----GEOMETRY SHADER-----");
+		DEBUG_LOG_N("\n-----GEOMETRY SHADER-----");
 		compileShader(_geometryPath, ShaderType::GEOMETRY, geoShader);
 	}
 
-	DEBUG_LOG_N("----------LINKING SHADERS AND CREATING SHADER PROGRAM----------");
+	DEBUG_LOG_N("\n----------LINKING SHADERS AND CREATING SHADER PROGRAM----------");
 	createProgram(vertShader, fragShader, geoShader);
 }
 
@@ -51,7 +52,8 @@ void ShaderProgram::changeShaderDirectory(const std::string& directory) const {
 	std::transform(dir.begin(), dir.end(), dir.begin(), ::tolower);
 
 	if(dir == "default") {
-		_shaderDirectory = R"(..\res\Shaders\)";
+		_shaderDirectory =
+			"C:/Users/Daniel/Desktop/Repos/OpenGLTutorial-Personal/OpenGLTutorial-Personal/res/Shaders/";
 	}
 	else {
 		_shaderDirectory = directory;
@@ -61,7 +63,7 @@ void ShaderProgram::changeShaderDirectory(const std::string& directory) const {
 GLuint ShaderProgram::getId() const { return _programId; }
 
 bool ShaderProgram::loadFileAsString(const std::string& file, std::string& output) {
-	const ifstream inStream(file.data());
+	ifstream inStream(file.data());
 	sstream fileContent;
 
 	if (!inStream.good()) {
@@ -137,7 +139,7 @@ void ShaderProgram::createProgram(GLuint vertex, GLuint fragment, GLuint geometr
 	//else
 	//	DEBUG_LOG_ERROR("No geometry shader linked!");
 
-	DEBUG_LOG("Creating program...");
+	DEBUG_LOG_N("Creating program...");
 	GLint success;
 
 	glLinkProgram(_programId);

@@ -94,6 +94,11 @@
     <ClInclude Include="src\Headers\Application.h" />
     <ClInclude Include="src\Headers\Macros.h" />
     <ClInclude Include="src\Headers\ShaderProgram.h" />
+    <ClInclude Include="src\Headers\VertexInfo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Shaders\fragShader.frag" />
+    <None Include="res\Shaders\vertShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
