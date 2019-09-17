@@ -13,10 +13,8 @@
 
 #define DEBUG_LOG_N(message, ...)		printf(message, ##__VA_ARGS__); printf("\n")
 
-#define DEBUG_LOG_ERROR(message, ...)	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0x0C);\
-										printf(message, ##__VA_ARGS__);\
-										SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0x07);\
-										printf("\n")
+#define DEBUG_LOG_ERROR(message, ...)	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0x0C); printf(message, ##__VA_ARGS__);\
+										SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0x07); printf("\n")
 
 #define SYS_EXIT(code)					system("pause"); exit(code)
 
