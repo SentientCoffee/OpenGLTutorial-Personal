@@ -86,6 +86,7 @@ void Application::run() {
 	VertexInfo::setupIndices();
 	VertexInfo::setupVertexObjects();
 	VertexInfo::loadAndCreateTextures();
+	VertexInfo::setTextureUniforms(shaderProgram);
 
 #pragma endregion
 
@@ -106,7 +107,6 @@ void Application::run() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// TODO: RENDER HERE
-		VertexInfo::bindTexture();
 		shaderProgram.use();
 		VertexInfo::draw();
 

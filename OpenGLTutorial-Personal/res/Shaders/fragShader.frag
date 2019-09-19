@@ -2,10 +2,11 @@
 out vec4 finalColour;							// Required final colour out vec4
 
 in vec3 vertexColour;							// Colour taken from vert shader
-in vec2 vertexTexture;							// Texture taken from vert shader
+in vec2 texCoords;								// Texture coordinates taken from vert shader
 
-uniform sampler2D finalTexture;					// Final texture
+uniform sampler2D texture1;						// Final texture
+uniform sampler2D texture2;						// Final texture
 
 void main() {
-	finalColour = texture(finalTexture, vertexTexture);
+	finalColour = mix(texture(texture1, texCoords), texture(texture2, texCoords), 0.2f);
 }

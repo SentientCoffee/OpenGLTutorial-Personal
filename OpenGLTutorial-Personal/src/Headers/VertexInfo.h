@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 
 #include "stb_image.h"
+#include "ShaderProgram.h"
 
 namespace Coffee {
 	class VertexInfo {
@@ -63,33 +64,69 @@ namespace Coffee {
 		}
 
 		static void loadAndCreateTextures() {
-			glGenTextures(1, &_texture);
-			glBindTexture(GL_TEXTURE_2D, _texture);
+			GLint width, height, numChannels;
+			// ReSharper disable once CppJoinDeclarationAndAssignment
+			GLubyte* imageData;
+
+			stbi_set_flip_vertically_on_load(true);
+
+			glGenTextures(1, &_texture1);
+			glBindTexture(GL_TEXTURE_2D, _texture1);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			GLint width, height, numChannels;
-			GLubyte* imageData = stbi_load("res/Textures/woodenContainer.jpg", &width, &height, &numChannels, 0);
+			// ReSharper disable once CppJoinDeclarationAndAssignment
+			imageData = stbi_load("res/Textures/woodenContainer.jpg", &width, &height, &numChannels, 0);
 
 			if(!imageData) {
-				DEBUG_LOG_ERROR("Failed to load texture!");
+				DEBUG_LOG_ERROR("Failed to load texture! (woodenContainer)");
+				stbi_image_free(imageData);
+			}
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+
+
+			glGenTextures(1, &_texture2);
+			glBindTexture(GL_TEXTURE_2D, _texture2);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			
+
+			// ReSharper disable once StringLiteralTypo
+			imageData = stbi_load("res/Textures/awesomeface.png", &width, &height, &numChannels, 0);
+
+			if(!imageData) {
+				DEBUG_LOG_ERROR("Failed to load texture! (awesomeface)");
 				stbi_image_free(imageData);
 			}
 			
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 			glGenerateMipmap(GL_TEXTURE_2D);
 			
 			stbi_image_free(imageData);
 		}
 
-		static void bindTexture() {
-			glBindTexture(GL_TEXTURE_2D, _texture);
+		static void setTextureUniforms(const ShaderProgram& shaderProgram) {
+			shaderProgram.use();
+			shaderProgram.setUniform("texture1", 0);
+			shaderProgram.setUniform("texture2", 1);
 		}
 		
 		static void draw() {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, _texture1);
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, _texture2);
+			
 			glBindVertexArray(_vao);                                // Bind the appropriate vertex array
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// Draw a rectangle now bitch
 
@@ -99,16 +136,20 @@ namespace Coffee {
 		static std::vector<GLfloat> _vertices;
 		static std::vector<GLuint> _indices;
 		static std::vector<GLfloat> _texCoords;
-		static GLuint _vao, _vbo, _ebo, _texture;
+		static GLuint _vao, _vbo, _ebo;
+		static GLuint _texture1, _texture2;
 	};
 
 	std::vector<GLfloat> VertexInfo::_vertices{};
 	std::vector<GLuint> VertexInfo::_indices{};
 	std::vector<GLfloat> VertexInfo::_texCoords{};
+	
 	GLuint VertexInfo::_vao = 0,
 		   VertexInfo::_vbo = 0,
-		   VertexInfo::_ebo = 0,
-		   VertexInfo::_texture = 0;
+		   VertexInfo::_ebo = 0;
+	
+	GLuint VertexInfo::_texture1 = 0,
+		   VertexInfo::_texture2 = 0;
 	
 }
 #endif
