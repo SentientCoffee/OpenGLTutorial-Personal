@@ -83,6 +83,7 @@ void Application::run() {
 #pragma region VAO/VBO/EBO SETUP
 
 	VertexInfo::setupVertices();
+	VertexInfo::setupIndices();
 	VertexInfo::setupVertexObjects();
 	VertexInfo::loadAndCreateTextures();
 
