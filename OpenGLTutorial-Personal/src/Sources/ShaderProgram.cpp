@@ -11,8 +11,7 @@ using sstream = std::stringstream;
 
 using namespace Coffee;
 
-string ShaderProgram::_shaderDirectory = 
-"C:/Users/Daniel/Desktop/Repos/OpenGLTutorial-Personal/OpenGLTutorial-Personal/res/Shaders/";
+string ShaderProgram::_shaderDirectory = "res/Shaders/";
 
 ShaderProgram::ShaderProgram() : _programId(0), _vertexPath(""), _fragmentPath(""), _geometryPath("") {}
 
@@ -52,8 +51,7 @@ void ShaderProgram::changeShaderDirectory(const std::string& directory) const {
 	std::transform(dir.begin(), dir.end(), dir.begin(), ::tolower);
 
 	if(dir == "default") {
-		_shaderDirectory =
-			"C:/Users/Daniel/Desktop/Repos/OpenGLTutorial-Personal/OpenGLTutorial-Personal/res/Shaders/";
+		_shaderDirectory = "res/Shaders/";
 	}
 	else {
 		_shaderDirectory = directory;

@@ -43,14 +43,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)src\Headers;$(ProjectDir)external;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)src\Headers;$(ProjectDir)external;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)external;$(ProjectDir)src;$(ProjectDir)src\Sources;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
     <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)src\Headers;$(ProjectDir)external;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)src\Headers;$(ProjectDir)external;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)external;$(ProjectDir)src;$(ProjectDir)src\Sources;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
@@ -89,12 +89,14 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Sources\Application.cpp" />
     <ClCompile Include="src\Sources\ShaderProgram.cpp" />
+    <ClCompile Include="external\stb_image_implementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Headers\Application.h" />
     <ClInclude Include="src\Headers\Macros.h" />
     <ClInclude Include="src\Headers\ShaderProgram.h" />
     <ClInclude Include="src\Headers\VertexInfo.h" />
+    <ClInclude Include="external\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Shaders\fragShader.frag" />

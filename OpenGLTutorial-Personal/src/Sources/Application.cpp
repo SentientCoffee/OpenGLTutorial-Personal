@@ -83,8 +83,8 @@ void Application::run() {
 #pragma region VAO/VBO/EBO SETUP
 
 	VertexInfo::setupVertices();
-	VertexInfo::setupIndices();
 	VertexInfo::setupVertexObjects();
+	VertexInfo::loadAndCreateTextures();
 
 #pragma endregion
 
@@ -105,6 +105,7 @@ void Application::run() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// TODO: RENDER HERE
+		VertexInfo::bindTexture();
 		shaderProgram.use();
 		VertexInfo::draw();
 

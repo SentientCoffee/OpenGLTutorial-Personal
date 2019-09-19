@@ -2,8 +2,10 @@
 out vec4 finalColour;							// Required final colour out vec4
 
 in vec3 vertexColour;							// Colour taken from vert shader
+in vec2 vertexTexture;							// Texture taken from vert shader
+
+uniform sampler2D finalTexture;					// Final texture
 
 void main() {
-	finalColour = vec4(vertexColour, 1.0f);		// Change vertexColour from vert shader to vec4
-												// and set the final colour to that value
+	finalColour = texture(finalTexture, vertexTexture);
 }
