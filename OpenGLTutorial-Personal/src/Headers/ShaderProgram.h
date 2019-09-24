@@ -2,6 +2,9 @@
 #define SHADER_PROGRAM_H
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <string>
 
 namespace Coffee {
@@ -29,6 +32,8 @@ namespace Coffee {
 		void setUniform(const std::string& name, bool value)     const;
 		void setUniform(const std::string& name, GLint value)    const;
 		void setUniform(const std::string& name, GLfloat value)  const;
+		
+		void setUniform(const std::string& name, glm::mat4 value)  const;
 
 		GLuint getId() const;
 		

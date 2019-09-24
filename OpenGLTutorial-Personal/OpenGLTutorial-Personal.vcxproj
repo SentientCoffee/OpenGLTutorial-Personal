@@ -89,7 +89,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Sources\Application.cpp" />
     <ClCompile Include="src\Sources\ShaderProgram.cpp" />
-    <ClCompile Include="external\stb_image_implementation.cpp" />
+    <ClCompile Include="external\stb_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Headers\Application.h" />

@@ -1,11 +1,11 @@
 #ifndef VERTEX_INFO_H
 #define VERTEX_INFO_H
 
-#include <vector>
-#include <glad/glad.h>
-
-#include "stb_image.h"
 #include "ShaderProgram.h"
+#include "stb_image.h"
+
+#include <glad/glad.h>
+#include <vector>
 
 namespace Coffee {
 	class VertexInfo {
@@ -99,8 +99,6 @@ namespace Coffee {
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			
-
 			// ReSharper disable once StringLiteralTypo
 			imageData = stbi_load("res/Textures/awesomeface.png", &width, &height, &numChannels, 0);
 
@@ -115,10 +113,18 @@ namespace Coffee {
 			stbi_image_free(imageData);
 		}
 
-		static void setTextureUniforms(const ShaderProgram& shaderProgram) {
+		static void setUniforms(const ShaderProgram& shaderProgram) {
 			shaderProgram.use();
+			
 			shaderProgram.setUniform("texture1", 0);
 			shaderProgram.setUniform("texture2", 1);
+
+			glm::mat4 transform(1.0f);
+			
+			transform = glm::rotate(transform, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+			transform = glm::scale(transform, glm::vec3(0.5f));
+			
+			shaderProgram.setUniform("transformation", transform);
 		}
 		
 		static void draw() {

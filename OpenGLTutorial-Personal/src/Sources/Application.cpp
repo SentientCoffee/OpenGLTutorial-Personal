@@ -86,7 +86,7 @@ void Application::run() {
 	VertexInfo::setupIndices();
 	VertexInfo::setupVertexObjects();
 	VertexInfo::loadAndCreateTextures();
-	VertexInfo::setTextureUniforms(shaderProgram);
+	VertexInfo::setUniforms(shaderProgram);
 
 #pragma endregion
 

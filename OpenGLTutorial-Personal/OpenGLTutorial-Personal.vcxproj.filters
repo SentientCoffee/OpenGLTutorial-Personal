@@ -27,7 +27,7 @@
     <ClCompile Include="src\Sources\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="external\stb_image_implementation.cpp">
+    <ClCompile Include="external\stb_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
