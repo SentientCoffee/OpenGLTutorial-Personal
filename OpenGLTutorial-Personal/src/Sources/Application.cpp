@@ -84,6 +84,7 @@ void Application::run() {
 
 	VertexInfo::setupVertices();
 	VertexInfo::setupIndices();
+	VertexInfo::setupPositions();
 	VertexInfo::setupVertexObjects();
 	VertexInfo::loadAndCreateTextures();
 	VertexInfo::setUniforms(shaderProgram);
@@ -98,17 +99,19 @@ void Application::run() {
 	DEBUG_LOG_N("OpenGL version %s", reinterpret_cast<GLchar const*>(glGetString(GL_VERSION)));
 	DEBUG_LOG_N("Using %s %s", reinterpret_cast<GLchar const*>(glGetString(GL_VENDOR)), reinterpret_cast<GLchar const*>(glGetString(GL_RENDERER)));
 
+	glEnable(GL_DEPTH_TEST);
+	
 	while (!glfwWindowShouldClose(window)) {
 
 		// TODO: PROCESS INPUTS
 
 		// Clear the screen every frame
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// TODO: RENDER HERE
-		shaderProgram.use();
-		VertexInfo::draw();
+		VertexInfo::convertViews(shaderProgram, _width, _height);
+		VertexInfo::draw(shaderProgram, static_cast<GLfloat>(glfwGetTime()));
 
 		// Swap the buffers after rendering
 		glfwSwapBuffers(window);

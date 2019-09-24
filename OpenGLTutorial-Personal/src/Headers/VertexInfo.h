@@ -12,12 +12,49 @@ namespace Coffee {
 	public:
 		static void setupVertices() {
 			_vertices = {
-				// positions				// colours				// texture coords
-				// x, y, z					// r, g, b				// s, t
-				 0.5f,  0.5f, 0.0f,			1.0f, 0.0f, 0.0f,		1.0f, 1.0f,			// top right
-				 0.5f, -0.5f, 0.0f,			0.0f, 1.0f, 0.0f,		1.0f, 0.0f,			// bottom right
-				-0.5f, -0.5f, 0.0f,			0.0f, 0.0f, 1.0f,		0.0f, 0.0f,			// bottom left
-				-0.5f,  0.5f, 0.0f,			1.0f, 1.0f, 0.0f,		0.0f, 1.0f			// top left 
+				// positions				// texture coords
+				// x, y, z					// s, t
+				-0.5f, -0.5f, -0.5f,		0.0f, 0.0f,
+				 0.5f, -0.5f, -0.5f,		1.0f, 0.0f,
+				 0.5f,  0.5f, -0.5f,		1.0f, 1.0f,
+				 0.5f,  0.5f, -0.5f,		1.0f, 1.0f,
+				-0.5f,  0.5f, -0.5f,		0.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,		0.0f, 0.0f,
+
+				-0.5f, -0.5f,  0.5f,		0.0f, 0.0f,
+				 0.5f, -0.5f,  0.5f,		1.0f, 0.0f,
+				 0.5f,  0.5f,  0.5f,		1.0f, 1.0f,
+				 0.5f,  0.5f,  0.5f,		1.0f, 1.0f,
+				-0.5f,  0.5f,  0.5f,		0.0f, 1.0f,
+				-0.5f, -0.5f,  0.5f,		0.0f, 0.0f,
+
+				-0.5f,  0.5f,  0.5f,		1.0f, 0.0f,
+				-0.5f,  0.5f, -0.5f,		1.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,		0.0f, 1.0f,
+				-0.5f, -0.5f, -0.5f,		0.0f, 1.0f,
+				-0.5f, -0.5f,  0.5f,		0.0f, 0.0f,
+				-0.5f,  0.5f,  0.5f,		1.0f, 0.0f,
+
+				 0.5f,  0.5f,  0.5f,		1.0f, 0.0f,
+				 0.5f,  0.5f, -0.5f,		1.0f, 1.0f,
+				 0.5f, -0.5f, -0.5f,		0.0f, 1.0f,
+				 0.5f, -0.5f, -0.5f,		0.0f, 1.0f,
+				 0.5f, -0.5f,  0.5f,		0.0f, 0.0f,
+				 0.5f,  0.5f,  0.5f,		1.0f, 0.0f,
+
+				-0.5f, -0.5f, -0.5f,		0.0f, 1.0f,
+				 0.5f, -0.5f, -0.5f,		1.0f, 1.0f,
+				 0.5f, -0.5f,  0.5f,		1.0f, 0.0f,
+				 0.5f, -0.5f,  0.5f,		1.0f, 0.0f,
+				-0.5f, -0.5f,  0.5f,		0.0f, 0.0f,
+				-0.5f, -0.5f, -0.5f,		0.0f, 1.0f,
+
+				-0.5f,  0.5f, -0.5f,		0.0f, 1.0f,
+				 0.5f,  0.5f, -0.5f,		1.0f, 1.0f,
+				 0.5f,  0.5f,  0.5f,		1.0f, 0.0f,
+				 0.5f,  0.5f,  0.5f,		1.0f, 0.0f,
+				-0.5f,  0.5f,  0.5f,		0.0f, 0.0f,
+				-0.5f,  0.5f, -0.5f,		0.0f, 1.0f
 			};
 		}
 		
@@ -25,6 +62,21 @@ namespace Coffee {
 			_indices = {
 				0, 1, 3,   // first triangle
 				1, 2, 3    // second triangle
+			};
+		}
+
+		static void setupPositions() {
+			_positions = {
+				glm::vec3( 0.0f,	 0.0f,	  0.0f),
+				glm::vec3( 2.0f,	 5.0f,	-15.0f),
+				glm::vec3(-1.5f,	-2.2f,	 -2.5f),
+				glm::vec3(-3.8f,	-2.0f,	-12.3f),
+				glm::vec3( 2.4f,	-0.4f,	 -3.5f),
+				glm::vec3(-1.7f,	 3.0f,	 -7.5f),
+				glm::vec3( 1.3f,	-2.0f,	 -2.5f),
+				glm::vec3( 1.5f,	 2.0f,	 -2.5f),
+				glm::vec3( 1.5f,	 0.2f,	 -1.5f),
+				glm::vec3(-1.3f,	 1.0f,	 -1.5f)
 			};
 		}
 		
@@ -46,14 +98,11 @@ namespace Coffee {
 
 
 			
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)0);								 // Link the vertex position attributes to the shader program
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);								 // Link the vertex position attributes to the shader program
 			glEnableVertexAttribArray(0);																				 // Enable the vertex position attribute array (disabled by default)
-																														 
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));			 // Link the vertex colour attributes to the shader program
-			glEnableVertexAttribArray(1);																				 // Enable the vertex colour attribute array
-																											 
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(6 * sizeof(GLfloat)));			 // Link the vertex colour attributes to the shader program
-			glEnableVertexAttribArray(2);																				 // Enable the vertex colour attribute array
+			
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));			 // Link the texture coordinate attributes to the shader program
+			glEnableVertexAttribArray(1);																				 // Enable the texture coordinate attribute array
 
 
 			
@@ -118,37 +167,57 @@ namespace Coffee {
 			
 			shaderProgram.setUniform("texture1", 0);
 			shaderProgram.setUniform("texture2", 1);
+		}
 
-			glm::mat4 transform(1.0f);
+		static void convertViews(const ShaderProgram& shaderProgram, const GLfloat windowWidth, const GLfloat windowHeight) {
+			glm::mat4 view(1.0f);
+			view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+			glm::mat4 projection = glm::perspective(glm::radians(45.0f), windowWidth / windowHeight, 0.1f, 100.0f);
 			
-			transform = glm::rotate(transform, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			transform = glm::scale(transform, glm::vec3(0.5f));
+			shaderProgram.use();
+			shaderProgram.setUniform("view", view);
+			shaderProgram.setUniform("projection", projection);
 			
-			shaderProgram.setUniform("transformation", transform);
 		}
 		
-		static void draw() {
+		static void draw(const ShaderProgram& shaderProgram, GLfloat dt) {
+			shaderProgram.use();
+			
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, _texture1);
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, _texture2);
-			
+
 			glBindVertexArray(_vao);                                // Bind the appropriate vertex array
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// Draw a rectangle now bitch
+
+			for (GLuint i = 0; i < _positions.size(); ++i) {
+				glm::mat4 model(1.0f);
+				model = glm::translate(model, _positions[i]);
+				
+				GLfloat angle = 20.0f * i;
+				model = glm::rotate(model, dt * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+				
+				shaderProgram.setUniform("model", model);
+
+
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+				//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// Draw a rectangle now bitch
+			}
 
 		}
 
 	private:
 		static std::vector<GLfloat> _vertices;
 		static std::vector<GLuint> _indices;
-		static std::vector<GLfloat> _texCoords;
+		static std::vector<glm::vec3> _positions;
 		static GLuint _vao, _vbo, _ebo;
 		static GLuint _texture1, _texture2;
 	};
 
 	std::vector<GLfloat> VertexInfo::_vertices{};
 	std::vector<GLuint> VertexInfo::_indices{};
-	std::vector<GLfloat> VertexInfo::_texCoords{};
+	std::vector<glm::vec3> VertexInfo::_positions{};
 	
 	GLuint VertexInfo::_vao = 0,
 		   VertexInfo::_vbo = 0,
